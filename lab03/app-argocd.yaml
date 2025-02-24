@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: https://github.com/Layzan/curso-gitops.git
+      path: lab03
+      targetRevision: HEAD
+      # directory:
+      #   recurse: true
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+
