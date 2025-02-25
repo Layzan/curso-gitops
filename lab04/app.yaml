@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: web-color
+  namespace: argocd
+spec:
+  # Vamos definir aqui a fonte do manifesto
+  source:
+    # Repositório Git
+    repoURL: https://github.com/Layzan/web-page-deploy.git
+    # Diretório
+    path: k8s
+    # Target revision
+    targetRevision: HEAD
+  #sincronização automatica com prune habilitado
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  # Agora vamos definir o ambiente que vai ser usado
+  destination:
+    namespace: webcolor
+    server: https://kubernetes.default.svc
+  # Definindo o projeto (aqui vai ser o default)
+  project: default
